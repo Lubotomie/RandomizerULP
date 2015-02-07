@@ -1,0 +1,92 @@
+string rdmpath="";
+int First = dlgDialog("Random spread generator") {
+ dlgHBoxLayout {
+  dlgStretch(1);
+  dlgLabel("Point at random generator directory");
+  dlgStretch(1);
+ }
+ dlgHBoxLayout {
+  dlgStringEdit(rdmpath);
+  dlgPushButton("Browse") {
+   rdmpath = dlgDirectory("Point at random generator directory");
+  }
+ }
+ dlgSpacing(10);
+ dlgPushButton("+Suivant") dlgAccept();
+};
+
+
+int FormFactor = dlgDialog("Random spread generator") {
+ dlgHBoxLayout {
+  dlgStretch(1);
+  dlgLabel("Choose a form factor");
+  dlgStretch(1);
+ }
+ dlgSpacing(10);
+ dlgHBoxLayout {
+  dlgStretch(1);
+  dlgPushButton("Rectangle") dlgAccept(0);
+  dlgPushButton("Trapeze") dlgAccept(1);
+  dlgPushButton("Triangle") dlgAccept(2);
+  dlgStretch(1);
+ }
+};
+
+
+switch(FormFactor){
+ case 0:
+
+real val1=0.0;
+real val2=0.0;
+real val3=0.0;
+real val4=0.0;
+int Params = dlgDialog("Random spread generator") {
+ dlgHBoxLayout {
+  dlgStretch(1);
+  dlgLabel("Define dimensions");
+  dlgStretch(1);
+ }
+ dlgSpacing(10);
+ dlgGroup("Vertical") {
+  dlgGridLayout {
+   dlgCell(0, 0){ dlgLabel("Dimensions"); }
+   dlgCell(1, 0){ dlgLabel("Length"); dlgRealEdit(val1,0.0,100.0); }
+   dlgCell(2, 0){ dlgLabel("Height"); dlgRealEdit(val2,0.0,100.0); }
+   dlgCell(0, 1){ dlgLabel("Bottom-Left Corner"); }
+   dlgCell(1, 1){ dlgLabel("x"); dlgRealEdit(val3,0.0,100.0); }
+   dlgCell(2, 1){ dlgLabel("y"); dlgRealEdit(val4,0.0,100.0); }
+  }
+ }
+ dlgSpacing(10);
+ dlgPushButton("+Generate") dlgAccept();
+};
+
+string rdmstring;
+string array1[]={rdmpath,"randomizer.app"};
+string command = strjoin(array1, '/');
+string array2[]={"open",command};
+command = strjoin(array2, ' ');
+system(command);
+string array3[]={rdmpath,"rand"};
+string rdmfilepath=strjoin(array3, '/');
+fileread(rdmstring,rdmfilepath);
+
+int Result = dlgDialog("Random spread generator") {
+ dlgHBoxLayout {
+  dlgStretch(1);
+  dlgLabel(rdmstring);
+  dlgStretch(1);
+ }
+};
+
+exit(0);
+
+ case 1:
+
+exit(0);
+
+ case 2:
+
+exit(0);
+
+}
